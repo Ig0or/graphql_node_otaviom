@@ -1,14 +1,13 @@
 const user = async (obj, args, context, info) => {
-    const fetch = context.fetch;
+    const getUsers = context.getUsers;
     const userId = args.userId;
-    const url = `http://localhost:3000/users/${userId}`;
-    const user = await fetch(url);
+    const user = await getUsers(userId);
     return user.json();
 };
 
 async function users(obj, args, context, info) {
-    const fetch = context.fetch;
-    const users = await fetch('http://localhost:3000/users');
+    const getUsers = context.getUsers;
+    const users = await getUsers();
     return users.json();
 }
 
