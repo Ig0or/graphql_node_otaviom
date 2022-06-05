@@ -1,28 +1,24 @@
-const post = () => {
-  return {
-    id: 'abdc2-scc',
-    title: 'post title',
-  };
+const posts = async (obj, args, context, info) => {
+    const getPosts = context.getPosts;
+
+    const response = await getPosts();
+    const a = await response.json();
+    return response.json();
 };
 
-const posts = () => {
-  return [
-    {
-      id: 'abdc2-scc',
-      title: 'post title',
-    },
-    {
-      id: '65932-scc',
-      title: 'post title 2',
-    },
-  ];
+const post = async (obj, args, context, info) => {
+    const getPosts = context.getPosts;
+    const postId = args.postId;
+
+    const response = await getPosts(postId);
+    return response.json();
 };
 
 const postResolvers = {
-  Query: {
-    post,
-    posts,
-  },
+    Query: {
+        post,
+        posts,
+    },
 };
 
 export { postResolvers };
