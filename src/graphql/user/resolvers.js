@@ -7,9 +7,10 @@ const user = async (obj, args, context, info) => {
 };
 
 async function users(obj, args, context, info) {
+    const apiFilterInput = new URLSearchParams(args.input);
     const getUsers = context.getUsers;
 
-    const response = await getUsers();
+    const response = await getUsers(`?/${apiFilterInput}`);
     return response.json();
 }
 

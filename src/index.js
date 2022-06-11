@@ -1,5 +1,6 @@
 import { ApolloServer } from 'apollo-server';
 
+import { apiFiltersTypeDefs } from './graphql/api-filters/typedefs';
 import { postTypeDefs } from './graphql/post/typedefs';
 import { postResolvers } from './graphql/post/resolvers';
 import { userResolvers } from './graphql/user/resolvers';
@@ -7,7 +8,7 @@ import { userTypeDefs } from './graphql/user/typedefs';
 import { context } from './graphql/context';
 
 const server = new ApolloServer({
-    typeDefs: [userTypeDefs, postTypeDefs],
+    typeDefs: [apiFiltersTypeDefs, userTypeDefs, postTypeDefs],
     resolvers: [userResolvers, postResolvers],
     context,
 });
