@@ -7,11 +7,17 @@ import { postResolvers } from './graphql/post/post_resolvers';
 import { userResolvers } from './graphql/user/users_resolvers';
 import { userTypeDefs } from './graphql/user/users_typedefs';
 import { context } from './graphql/context';
+import { PostsApi } from './graphql/post/datasources';
 
 const server = new ApolloServer({
     typeDefs: [apiFiltersTypeDefs, userTypeDefs, postTypeDefs],
     resolvers: [userResolvers, postResolvers, apiFiltersResolvers],
     context,
+    dataSources: () => {
+        return {
+            postApi: new PostsApi(),
+        };
+    },
 });
 
 server.listen(4003).then(({ url }) => {
