@@ -1,17 +1,13 @@
 const posts = async (obj, args, context, info) => {
-    const apiFilterInput = new URLSearchParams(args.input);
-    const getPosts = context.getPosts;
+    const input = args.input;
+    const posts = await context.dataSources.postApi.getPosts(input);
 
-    const response = await getPosts(`?/${apiFilterInput}`);
-    return response.json();
+    return posts;
 };
 
 const post = async (obj, args, context, info) => {
-    const getPosts = context.getPosts;
     const postId = args.postId;
-
-    const response = await getPosts(postId);
-    const post = await response.json();
+    const post = await context.dataSources.postApi.getPost(postId);
 
     return post;
 };
