@@ -13,8 +13,10 @@ const post = async (obj, args, context, info) => {
 };
 
 const user = async (obj, args, context, info) => {
-    const userDataLoader = context.userDataLoader;
-    const user = userDataLoader.load(obj.userId);
+    const userId = obj.userId;
+    const userApi = context.dataSources.userApi;
+    const user = userApi.batchloadByPostId(userId);
+
     return user;
 };
 

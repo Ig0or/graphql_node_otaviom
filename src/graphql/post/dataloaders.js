@@ -4,8 +4,7 @@ const makePostDataLoader = (getPosts) => {
     return new DataLoader(async (ids) => {
         const urlQuery = ids.join('&userId=');
         const url = `?userId=${urlQuery}`;
-        const response = await getPosts(url);
-        const posts = await response.json();
+        const posts = await getPosts(url);
         return ids.map((id) => {
             return posts.filter((post) => post.userId === id);
         });

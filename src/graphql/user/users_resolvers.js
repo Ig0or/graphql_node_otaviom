@@ -1,22 +1,21 @@
-const user = async (obj, args, context, info) => {
-    const getUsers = context.getUsers;
-    const userId = args.userId;
-
-    const response = await getUsers(userId);
-    return response.json();
-};
-
 const users = async (obj, args, context, info) => {
-    const apiFilterInput = new URLSearchParams(args.input);
-    const getUsers = context.getUsers;
+    const input = args.input;
+    const users = await context.dataSources.userApi.getUsers(input);
 
-    const response = await getUsers(`?/${apiFilterInput}`);
-    return response.json();
+    return users;
 };
 
+const user = async (obj, args, context, info) => {
+    const userId = args.userId;
+    const user = await context.dataSources.userApi.getUser(userId);
+
+    return user;
+};
 const posts = async (obj, args, context, info) => {
-    const postDataLoader = context.postDataLoader;
-    const post = postDataLoader.load(obj.id);
+    const postId = obj.id;
+    const postApi = context.dataSources.postApi;
+    const post = postApi.batchloadByUserId(postId);
+
     return post;
 };
 

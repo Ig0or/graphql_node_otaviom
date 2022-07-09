@@ -8,6 +8,7 @@ import { userResolvers } from './graphql/user/users_resolvers';
 import { userTypeDefs } from './graphql/user/users_typedefs';
 import { context } from './graphql/context';
 import { PostsApi } from './graphql/post/datasources';
+import { UsersApi } from './graphql/user/datasources';
 
 const server = new ApolloServer({
     typeDefs: [apiFiltersTypeDefs, userTypeDefs, postTypeDefs],
@@ -16,6 +17,7 @@ const server = new ApolloServer({
     dataSources: () => {
         return {
             postApi: new PostsApi(),
+            userApi: new UsersApi(),
         };
     },
 });
